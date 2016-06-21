@@ -28,10 +28,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   </div>
   <h2 class="form-heading">login</h2>
   <div class="app-cam">
-	  <form>
+	  <form method="post">
 	  	<input type="hidden" name="basepath" value="<%=request.getContextPath()%>" />
-		<input id="uname" name="uname" type="text" class="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-		<input id="pwd" name="pwd" type="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+		<input id="uname" name="uname" type="text" class="text" value="" placeholder="请输入用户名">
+		<input id="pwd" name="pwd" type="password" value="" placeholder="请输入密码" >
 		<div class="submit"><input type="submit" onclick="login();" value="Login"></div>
 		<div class="login-social-link">
           <a href="index.html" class="facebook">
@@ -68,7 +68,7 @@ function login()
 		return false;
 	}
 	
-	var url = document.forms[0].basepath.value+"/jsp/index.jsp";
+	var url = document.forms[0].basepath.value+"/servlet/LoginServlet";
 	document.forms[0].action = url;
 	document.forms[0].submit();
 }
