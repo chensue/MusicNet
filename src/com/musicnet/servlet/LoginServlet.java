@@ -1,12 +1,13 @@
 package com.musicnet.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.musicnet.service.LoginService;
 
 /**
  * 登录
@@ -16,6 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
 
 	/**
+     * 
+     */
+    private static final long serialVersionUID = -4775317767453010987L;
+
+    /**
 	 * Constructor of the object.
 	 */
 	public LoginServlet() {
@@ -61,7 +67,33 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		//response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		response.sendRedirect(request.getContextPath()+"/jsp/index.jsp");
+		String uname = (String)request.getParameter("uname");
+		String pwd = (String)request.getParameter("pwd");
+		LoginService service = new LoginService();
+		try
+        {
+            int result = service.login(uname, pwd);
+            switch (result) {
+            case 0:
+                //登录成功
+                //TODO 将用户信息保存到session域中
+                response.sendRedirect(request.getContextPath()+"/jsp/index.jsp");
+                break;
+            case 1:
+                //用户名不存在
+                request.setAttribute("msg", "用户名不存在!");
+                request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+                break;
+            case 2:
+                //密码错误
+                request.setAttribute("msg", "密码错误!"); 
+                request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+                break;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 	}
 
 	/**
