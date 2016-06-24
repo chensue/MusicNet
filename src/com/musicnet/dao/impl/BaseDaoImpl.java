@@ -15,7 +15,7 @@ import com.musicnet.db.DBUtil;
 
 public class BaseDaoImpl implements BaseDao
 {
-    private Connection conn;
+    Connection conn;
 
     public BaseDaoImpl()
     {

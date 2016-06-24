@@ -145,7 +145,7 @@ body
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
+                            <a href="javascript:showInmainFr('<%=request.getContextPath()%>/servlet/ArtistInfoServlet');"><i class="fa fa-dashboard fa-fw nav_icon"></i>歌手</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>Layouts<span class="fa arrow"></span></a>
@@ -239,7 +239,14 @@ body
 </div>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
 
+function showInmainFr(url)
+{
+	document.getElementById("mainFr").src=url;
+}
+
+</script>
 </body>
 
 </html>
